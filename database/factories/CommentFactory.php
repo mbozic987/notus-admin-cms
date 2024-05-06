@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Comment;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -14,10 +16,26 @@ class CommentFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition(): array
+    protected $model = Comment::class;
+
+    public function definition()
     {
         return [
-            //
+            'title' => fake()->sentence(),
+            'content' => fake()->paragraph(),
+            'grade' => rand(null ,5)
         ];
+    }
+
+    public function configure()
+    {
+        return $this->afterCreating(function (Comment $comment) {
+            $user = null;
+            if (rand(0, 1) == 1) {
+                $user = User::role('user')->inRandomOrder()->first();
+            }
+            $comment->user_id = $user ? $user->id : null;
+            $comment->save();
+        });
     }
 }
