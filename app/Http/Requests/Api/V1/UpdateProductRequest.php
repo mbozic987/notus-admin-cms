@@ -4,14 +4,14 @@ namespace App\Http\Requests\Api\V1;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateProductRequest extends FormRequest
+class UpdateProductRequest extends BaseProductRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,11 @@ class UpdateProductRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'sometimes|string',
+            'description' => 'sometimes|string',
+            'price' => 'sometimes|regex:/^\d*(\.\d{2})?$/',
+            'categories' => 'sometimes|array',
+            'categories.*' => 'integer|exists:categories,id',
         ];
     }
 }
