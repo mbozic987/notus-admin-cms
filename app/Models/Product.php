@@ -31,4 +31,9 @@ class Product extends Model
     {
         return $filters->apply($builder);
     }
+
+    public function media()
+    {
+        return $this->hasMany(Media::class)->orderByDesc('is_primary');
+    }
 }

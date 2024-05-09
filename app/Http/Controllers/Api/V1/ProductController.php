@@ -16,7 +16,7 @@ class ProductController extends ApiController
      */
     public function index(ProductFilter $filters)
     {
-        return ProductResource::collection(Product::filter($filters)->paginate());
+        return ProductResource::collection(Product::filter($filters)->with('media')->paginate());
     }
 
     /**
@@ -38,7 +38,7 @@ class ProductController extends ApiController
     public function show($product_id)
     {
         try {
-            $product = Product::findOrFail($product_id);
+            $product = Product::with('media')->findOrFail($product_id);
 
             if ($this->include('comments')) {
                 return new ProductResource($product->load('comments'));
@@ -52,7 +52,7 @@ class ProductController extends ApiController
         }
     }
 
-    /**
+    /**88888888
      * Update the specified resource in storage.
      */
     public function update(UpdateProductRequest $request, $product_id)

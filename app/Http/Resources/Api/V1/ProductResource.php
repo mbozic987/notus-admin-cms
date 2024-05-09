@@ -26,6 +26,7 @@ class ProductResource extends JsonResource
             ],
 
             'includes' => [
+                MediaResource::collection($this->whenLoaded('media')),
                 CommentResource::collection($this->whenLoaded('comments')),
                 CategoryResource::collection($this->whenLoaded('categories')),
             ],
