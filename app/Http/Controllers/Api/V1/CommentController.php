@@ -7,6 +7,7 @@ use App\Http\Requests\Api\V1\StoreCommentRequest;
 use App\Http\Requests\Api\V1\UpdateCommentRequest;
 use App\Http\Resources\Api\V1\CommentResource;
 use App\Models\Comment;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class CommentController extends ApiController
@@ -53,6 +54,8 @@ class CommentController extends ApiController
             return new CommentResource($comment);
         } catch (ModelNotFoundException $exception) {
             return $this->error('Comment not found', 404);
+        } catch (AuthorizationException $exception) {
+            return $this->error('You are not authorized to update that resource', 401);
         }
     }
 
@@ -69,6 +72,8 @@ class CommentController extends ApiController
             return $this->success('Comment deleted!', null);
         } catch (ModelNotFoundException $exception) {
             return $this->error('Comment not found', 404);
+        } catch (AuthorizationException $exception) {
+            return $this->error('You are not authorized to delete that resource', 401);
         }
     }
 }

@@ -6,6 +6,7 @@ use App\Http\Requests\Api\V1\StoreCategoryRequest;
 use App\Http\Requests\Api\V1\UpdateCategoryRequest;
 use App\Http\Resources\Api\V1\CategoryResource;
 use App\Models\Category;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class CategoryController extends ApiController
@@ -23,10 +24,14 @@ class CategoryController extends ApiController
      */
     public function store(StoreCategoryRequest $request)
     {
-        $this->authorize('create', Category::class);
-        $category = Category::create($request->mappedAttributes());
+        try {
+            $this->authorize('create', Category::class);
+            $category = Category::create($request->mappedAttributes());
 
-        return new CategoryResource($category);
+            return new CategoryResource($category);
+        } catch (AuthorizationException $exception) {
+            return $this->error('You are not authorized to create that resource', 401);
+        }
     }
 
     /**
@@ -57,6 +62,8 @@ class CategoryController extends ApiController
             return new CategoryResource($category);
         } catch (ModelNotFoundException $exception) {
             return $this->error('Category not found', 404);
+        } catch (AuthorizationException $exception) {
+            return $this->error('You are not authorized to update that resource', 401);
         }
     }
 
@@ -74,6 +81,8 @@ class CategoryController extends ApiController
             return $this->success('Category deleted', null);
         } catch (ModelNotFoundException $exception) {
             return $this->error('Category not found', 404);
+        } catch (AuthorizationException $exception) {
+            return $this->error('You are not authorized to delete that resource', 401);
         }
     }
 }

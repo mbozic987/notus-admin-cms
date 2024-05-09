@@ -19,7 +19,7 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::apiResource('comments', CommentController::class)->except('index', 'show', 'store');
 
     //Optional routes with parent/child relations built in
-    Route::apiResource('products.pictures', ProductMediaController::class)->except('update');
+    Route::apiResource('products.pictures', ProductMediaController::class);
 
     Route::get('/user', function (Request $request) {
         return $request->user();

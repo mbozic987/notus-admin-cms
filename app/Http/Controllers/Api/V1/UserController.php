@@ -7,6 +7,7 @@ use App\Http\Requests\Api\V1\StoreUserRequest;
 use App\Http\Requests\Api\V1\UpdateUserRequest;
 use App\Http\Resources\Api\V1\UserResource;
 use App\Models\User;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,9 +18,13 @@ class UserController extends ApiController
      */
     public function index(UserFilter $filters)
     {
-        $this->authorize('viewAny', User::class);
+        try {
+            $this->authorize('viewAny', User::class);
 
-        return UserResource::collection(User::filter($filters)->paginate());
+            return UserResource::collection(User::filter($filters)->paginate());
+        } catch (AuthorizationException $exception) {
+            return $this->error('You are not authorized to view those resource', 401);
+        }
     }
 
     /**
@@ -27,13 +32,17 @@ class UserController extends ApiController
      */
     public function store(StoreUserRequest $request)
     {
-        $this->authorize('create', User::class);
+        try {
+            $this->authorize('create', User::class);
 
-        $user = User::create($request->mappedAttributes());
+            $user = User::create($request->mappedAttributes());
 
-        $user->assignRole($request->input('role'))->refresh();
+            $user->assignRole($request->input('role'))->refresh();
 
-        return new UserResource($user);
+            return new UserResource($user);
+        } catch (AuthorizationException $exception) {
+            return $this->error('You are not authorized to create that resource', 401);
+        }
     }
 
     /**
@@ -52,6 +61,8 @@ class UserController extends ApiController
             return new UserResource($user);
         } catch (ModelNotFoundException $exception) {
             return $this->error('User not found', 404);
+        } catch (AuthorizationException $exception) {
+            return $this->error('You are not authorized to view that resource', 401);
         }
     }
 
@@ -74,6 +85,8 @@ class UserController extends ApiController
             return new UserResource($user);
         } catch (ModelNotFoundException $exception) {
             return $this->error('User not found', 404);
+        } catch (AuthorizationException $exception) {
+            return $this->error('You are not authorized to update that resource', 401);
         }
     }
 
@@ -99,6 +112,8 @@ class UserController extends ApiController
             return $this->success('User deleted!', null);
         } catch (ModelNotFoundException $exception) {
             return $this->error('User not found', 404);
+        } catch (AuthorizationException $exception) {
+            return $this->error('You are not authorized to delete that resource', 401);
         }
     }
 }

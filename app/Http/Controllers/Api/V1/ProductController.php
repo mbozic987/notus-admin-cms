@@ -7,6 +7,7 @@ use App\Http\Requests\Api\V1\StoreProductRequest;
 use App\Http\Requests\Api\V1\UpdateProductRequest;
 use App\Http\Resources\Api\V1\ProductResource;
 use App\Models\Product;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ProductController extends ApiController
@@ -52,7 +53,7 @@ class ProductController extends ApiController
         }
     }
 
-    /**88888888
+    /**
      * Update the specified resource in storage.
      */
     public function update(UpdateProductRequest $request, $product_id)
@@ -68,6 +69,8 @@ class ProductController extends ApiController
             return new ProductResource($product);
         } catch (ModelNotFoundException $exception) {
             return $this->error('Product not found', 404);
+        } catch (AuthorizationException $exception) {
+            return $this->error('You are not authorized to update that resource', 401);
         }
     }
 
@@ -84,6 +87,8 @@ class ProductController extends ApiController
             return $this->success('Product deleted!', null);
         } catch (ModelNotFoundException $exception) {
             return $this->error('Product not found', 404);
+        } catch (AuthorizationException $exception) {
+            return $this->error('You are not authorized to delete that resource', 401);
         }
     }
 }
