@@ -2,16 +2,18 @@
 
 namespace App\Http\Requests\Api\V1;
 
+use App\Rules\Api\V1\CheckParentDepth;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class UpdateCategoryRequest extends FormRequest
+class UpdateCategoryRequest extends BaseCategoryRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +24,15 @@ class UpdateCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => [
+                'sometimes',
+                'string',
+                Rule::unique('categories')->ignore($this->category)],
+            'parentId' => [
+                'sometimes',
+                'exists:categories,id',
+                new CheckParentDepth
+            ]
         ];
     }
 }

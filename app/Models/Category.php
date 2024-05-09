@@ -19,4 +19,19 @@ class Category extends Model
     {
         return $this->belongsToMany(Product::class);
     }
+
+    public function parent()
+    {
+        return $this->belongsTo(Category::class, 'parent_id');
+    }
+
+    public function children()
+    {
+        return $this->hasMany(Category::class, 'parent_id');
+    }
+
+    public static function getAllWithSubcategories()
+    {
+        return static::with('children')->whereNull('parent_id')->get();
+    }
 }
