@@ -24,10 +24,4 @@ class BaseProductRequest extends FormRequest
 
         return $attributesToUpdate;
     }
-    public function messages()
-    {
-        return [
-            'role' => 'Role is required and can be only admin or moderator.'
-        ];
-    }
 }

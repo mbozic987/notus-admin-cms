@@ -16,21 +16,21 @@ class RoleAndPermissionSeeder extends Seeder
         // Create roles
         $adminRole = Role::create(['name' => 'admin']);
         $moderatorRole = Role::create(['name' => 'moderator']);
-        $userRole = Role::create(['name' => 'user']);
+        Role::create(['name' => 'user']);
 
         // Define permissions
         $permissions = [
             'create user',
             'update user',
             'delete user',
+            'create product',
+            'update product',
+            'delete product',
             'create category',
             'update category',
             'delete category',
-            'create comment',
             'update comment',
-            'delete comment',
-            'update own comment',
-            'delete own comment',
+            'delete comment'
         ];
 
         // Create permissions
@@ -41,6 +41,5 @@ class RoleAndPermissionSeeder extends Seeder
         // Assign permissions to roles
         $adminRole->syncPermissions(Permission::all());
         $moderatorRole->syncPermissions(['update comment', 'delete comment']);
-        $userRole->syncPermissions(['create comment', 'update own comment', 'delete own comment']);
     }
 }

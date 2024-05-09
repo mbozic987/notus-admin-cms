@@ -2,26 +2,20 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\Api\V1\LoginUserRequest;
 use App\Http\Requests\Api\V1\StoreUserRequest;
 use App\Models\User;
-use App\Traits\ApiResponses;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
-class AuthController extends Controller
-{
-    use ApiResponses;
-    public function register(StoreUserRequest $request)
+class AuthController extends ApiController
+{public function register(StoreUserRequest $request)
     {
-        $validatedData = $request->validated();
-
         $user = User::create([
-            'name' => $validatedData['name'],
-            'email' => $validatedData['email'],
-            'password' => Hash::make($validatedData['password']),
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'password' => Hash::make($request->input('password')),
         ]);
 
         $user->assignRole('user')->refresh();

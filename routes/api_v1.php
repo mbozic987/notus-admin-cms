@@ -3,9 +3,8 @@
 use App\Http\Controllers\Api\V1\AuthController;
 use App\Http\Controllers\Api\V1\CategoryController;
 use App\Http\Controllers\Api\V1\CommentController;
-use App\Http\Controllers\Api\V1\ProductCommentsController;
 use App\Http\Controllers\Api\V1\ProductController;
-use App\Http\Controllers\Api\V1\UserCommentsController;
+use App\Http\Controllers\Api\V1\ProductMediaController;
 use App\Http\Controllers\Api\V1\UserController;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
@@ -20,8 +19,7 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::apiResource('comments', CommentController::class)->except('index', 'show', 'store');
 
     //Optional routes with parent/child relations built in
-    Route::apiResource('users.comments', UserCommentsController::class);
-    Route::apiResource('products.comments', ProductCommentsController::class);
+    Route::apiResource('products.pictures', ProductMediaController::class)->except('update');
 
     Route::get('/user', function (Request $request) {
         return $request->user();
