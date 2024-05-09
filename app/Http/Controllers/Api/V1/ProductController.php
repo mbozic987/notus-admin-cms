@@ -13,7 +13,12 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 class ProductController extends ApiController
 {
     /**
-     * Display a listing of the resource.
+     * View all products
+     *
+     * Fetch and return all products, filters, sort and includes implemented.
+     *
+     * @unauthenticated
+     * @group Product
      */
     public function index(ProductFilter $filters)
     {
@@ -21,7 +26,11 @@ class ProductController extends ApiController
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Create product
+     *
+     * Create new product.
+     *
+     * @group Product
      */
     public function store(StoreProductRequest $request)
     {
@@ -34,7 +43,12 @@ class ProductController extends ApiController
     }
 
     /**
-     * Display the specified resource.
+     * View product
+     *
+     * Fetch specific product.
+     *
+     * @unauthenticated
+     * @group Product
      */
     public function show($product_id)
     {
@@ -54,7 +68,11 @@ class ProductController extends ApiController
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update product
+     *
+     * Update specific product.
+     *
+     * @group Product
      */
     public function update(UpdateProductRequest $request, $product_id)
     {
@@ -75,7 +93,11 @@ class ProductController extends ApiController
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Delete product
+     *
+     * Delete specific product.
+     *
+     * @group Product
      */
     public function destroy($product_id)
     {

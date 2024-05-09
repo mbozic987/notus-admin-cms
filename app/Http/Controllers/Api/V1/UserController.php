@@ -14,7 +14,11 @@ use Illuminate\Support\Facades\Auth;
 class UserController extends ApiController
 {
     /**
-     * Display a listing of the resource.
+     * View all users
+     *
+     * Fetch and return all users, filters, sort and includes implemented.
+     *
+     * @group User
      */
     public function index(UserFilter $filters)
     {
@@ -28,7 +32,11 @@ class UserController extends ApiController
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Create user
+     *
+     * Create new user.
+     *
+     * @group User
      */
     public function store(StoreUserRequest $request)
     {
@@ -46,7 +54,11 @@ class UserController extends ApiController
     }
 
     /**
-     * Display the specified resource.
+     * View user
+     *
+     * Fetch specific user.
+     *
+     * @group User
      */
     public function show($user_id)
     {
@@ -67,7 +79,11 @@ class UserController extends ApiController
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update user
+     *
+     * Update specific user.
+     *
+     * @group User
      */
     public function update(UpdateUserRequest $request, $user_id)
     {
@@ -99,8 +115,13 @@ class UserController extends ApiController
         }
         $user->syncRoles($request->input('role'))->refresh();
     }
+
     /**
-     * Remove the specified resource from storage.
+     * Delete user
+     *
+     * Delete specific user.
+     *
+     * @group User
      */
     public function destroy($user_id)
     {

@@ -10,7 +10,16 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends ApiController
-{public function register(StoreUserRequest $request)
+{
+    /**
+     * Register
+     *
+     * Register and login new user
+     *
+     * @unauthenticated
+     * @group Authentication
+     */
+    public function register(StoreUserRequest $request)
     {
         $user = User::create([
             'name' => $request->input('name'),
@@ -25,6 +34,14 @@ class AuthController extends ApiController
         return $this->loggedin('Welcome, you have successfully signed in!', $user, $access_token);
     }
 
+    /**
+     * Login
+     *
+     * Login registered user and return API token
+     *
+     * @unauthenticated
+     * @group Authentication
+     */
     public function login(LoginUserRequest $request)
     {
         $request->validated($request->all());
@@ -39,6 +56,13 @@ class AuthController extends ApiController
         return $this->loggedin('Successfully logged in!', $user, $access_token);
     }
 
+    /**
+     * Logout
+     *
+     * Logs out user and destroys API token
+     *
+     * @group Authentication
+     */
     public function logout(Request $request)
     {
         $request->user()->currentAccessToken()->delete();

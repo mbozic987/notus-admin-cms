@@ -16,3 +16,6 @@
 - Show all routes: `sail artisan route:list`
 - Close containers: `sail down`
 - Clear Laravel configuration: `sail artisan config:clear`
+
+## Api documentation
+- Documentation on: `http://localhost/docs`

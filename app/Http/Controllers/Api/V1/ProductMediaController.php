@@ -13,7 +13,12 @@ use Illuminate\Support\Facades\Storage;
 class ProductMediaController extends ApiController
 {
     /**
-     * Display a listing of the resource.
+     * View all product pictures
+     *
+     * Fetch and return all pictures for specific product.
+     *
+     * @unauthenticated
+     * @group ProductPicture
      */
     public function index($product_id)
     {
@@ -21,7 +26,11 @@ class ProductMediaController extends ApiController
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Create product picture
+     *
+     * Upload media and create input in media table.
+     *
+     * @group ProductPicture
      */
     public function store(StoreProductMediaRequest $request, $product_id)
     {
@@ -56,7 +65,12 @@ class ProductMediaController extends ApiController
     }
 
     /**
-     * Display the specified resource.
+     * View product picture
+     *
+     * Fetch specific picture data.
+     *
+     * @unauthenticated
+     * @group ProductPicture
      */
     public function show($product_id, $media_id)
     {
@@ -74,7 +88,11 @@ class ProductMediaController extends ApiController
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update product picture
+     *
+     * Update picture data, for now only change is_primary state.
+     *
+     * @group ProductPicture
      */
     public function update(UpdateProductMediaRequest $request, $product_id, $media_id)
     {
@@ -100,7 +118,11 @@ class ProductMediaController extends ApiController
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Delete product picture
+     *
+     * Delete media resource and remove file from server.
+     *
+     * @group ProductPicture
      */
     public function destroy($product_id, $media_id)
     {

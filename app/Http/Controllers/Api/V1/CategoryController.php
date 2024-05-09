@@ -12,7 +12,12 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 class CategoryController extends ApiController
 {
     /**
-     * Display a listing of the resource.
+     * View all categories
+     *
+     * Fetch and return all categories with subcategories.
+     *
+     * @unauthenticated
+     * @group Category
      */
     public function index()
     {
@@ -20,7 +25,11 @@ class CategoryController extends ApiController
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Create category
+     *
+     * Create new category.
+     *
+     * @group Category
      */
     public function store(StoreCategoryRequest $request)
     {
@@ -35,7 +44,12 @@ class CategoryController extends ApiController
     }
 
     /**
-     * Display the specified resource.
+     * View category
+     *
+     * Fetch specific category.
+     *
+     * @unauthenticated
+     * @group Category
      */
     public function show($category_id)
     {
@@ -49,7 +63,11 @@ class CategoryController extends ApiController
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update category
+     *
+     * Update specific category.
+     *
+     * @group Category
      */
     public function update(UpdateCategoryRequest $request, $category_id)
     {
@@ -68,7 +86,11 @@ class CategoryController extends ApiController
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Delete category
+     *
+     * Delete specific category.
+     *
+     * @group Category
      */
     public function destroy($category_id)
     {

@@ -13,7 +13,12 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 class CommentController extends ApiController
 {
     /**
-     * Display a listing of the resource.
+     * View all Comments
+     *
+     * Fetch and return all comments, filters, sort and includes implemented.
+     *
+     * @unauthenticated
+     * @group Comment
      */
     public function index(CommentFilter $filters)
     {
@@ -21,7 +26,12 @@ class CommentController extends ApiController
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Create Comment
+     *
+     * Create new comment.
+     *
+     * @unauthenticated
+     * @group Comment
      */
     public function store(StoreCommentRequest $request)
     {
@@ -31,7 +41,12 @@ class CommentController extends ApiController
     }
 
     /**
-     * Display the specified resource.
+     * View Comment
+     *
+     * Fetch specific category.
+     *
+     * @unauthenticated
+     * @group Comment
      */
     public function show(Comment $comment)
     {
@@ -42,7 +57,11 @@ class CommentController extends ApiController
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update Comment
+     *
+     * Update specific comment.
+     *
+     * @group Comment
      */
     public function update(UpdateCommentRequest $request, $comment_id)
     {
@@ -60,7 +79,11 @@ class CommentController extends ApiController
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Delete Comment
+     *
+     * Delete specific comment.
+     *
+     * @group Comment
      */
     public function destroy($comment_id)
     {

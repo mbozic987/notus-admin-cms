@@ -1,0 +1,252 @@
+name: Category
+description: ''
+endpoints:
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/categories
+    metadata:
+      groupName: Category
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Create category'
+      description: 'Create new category.'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: ''
+        required: true
+        example: mollitia
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+      parentId:
+        name: parentId
+        description: ''
+        required: false
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+    cleanBodyParameters:
+      name: mollitia
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 2|XN3v5XbCA86njwOGg9gfNPySqwzjEeVcn8VF6WcW9984e446'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - PUT
+      - PATCH
+    uri: 'api/v1/categories/{id}'
+    metadata:
+      groupName: Category
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Update category'
+      description: 'Update specific category.'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the category.'
+        required: true
+        example: dicta
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+    cleanUrlParameters:
+      id: dicta
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: ''
+        required: false
+        example: in
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+      parentId:
+        name: parentId
+        description: ''
+        required: false
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+    cleanBodyParameters:
+      name: in
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 2|XN3v5XbCA86njwOGg9gfNPySqwzjEeVcn8VF6WcW9984e446'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - DELETE
+    uri: 'api/v1/categories/{id}'
+    metadata:
+      groupName: Category
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'Delete category'
+      description: 'Delete specific category.'
+      authenticated: true
+      custom: []
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the category.'
+        required: true
+        example: in
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+    cleanUrlParameters:
+      id: in
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth:
+      - headers
+      - Authorization
+      - 'Bearer 2|XN3v5XbCA86njwOGg9gfNPySqwzjEeVcn8VF6WcW9984e446'
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/v1/categories
+    metadata:
+      groupName: Category
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'View all categories'
+      description: 'Fetch and return all categories with subcategories.'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"data":[{"type":"category","id":16,"attributes":{"name":"Main Category 2","depth":0},"includes":[[{"type":"category","id":17,"attributes":{"name":"Subcategory 2.1","depth":1},"includes":[[{"type":"category","id":18,"attributes":{"name":"Sub-subcategory 2.1.1","depth":2},"includes":[[{"type":"category","id":19,"attributes":{"name":"Sub-sub-subcategory 2.1.1.1","depth":3},"includes":[[]],"links":{"self":"http:\/\/localhost\/api\/v1\/categories\/19"}},{"type":"category","id":20,"attributes":{"name":"Sub-sub-subcategory 2.1.1.2","depth":3},"includes":[[]],"links":{"self":"http:\/\/localhost\/api\/v1\/categories\/20"}}]],"links":{"self":"http:\/\/localhost\/api\/v1\/categories\/18"}},{"type":"category","id":21,"attributes":{"name":"Sub-subcategory 2.1.2","depth":2},"includes":[[{"type":"category","id":22,"attributes":{"name":"Sub-sub-subcategory 2.1.2.1","depth":3},"includes":[[]],"links":{"self":"http:\/\/localhost\/api\/v1\/categories\/22"}},{"type":"category","id":23,"attributes":{"name":"Sub-sub-subcategory 2.1.2.2","depth":3},"includes":[[]],"links":{"self":"http:\/\/localhost\/api\/v1\/categories\/23"}}]],"links":{"self":"http:\/\/localhost\/api\/v1\/categories\/21"}}]],"links":{"self":"http:\/\/localhost\/api\/v1\/categories\/17"}},{"type":"category","id":24,"attributes":{"name":"Subcategory 2.2","depth":1},"includes":[[{"type":"category","id":25,"attributes":{"name":"Sub-subcategory 2.2.1","depth":2},"includes":[[{"type":"category","id":26,"attributes":{"name":"Sub-sub-subcategory 2.2.1.1","depth":3},"includes":[[]],"links":{"self":"http:\/\/localhost\/api\/v1\/categories\/26"}},{"type":"category","id":27,"attributes":{"name":"Sub-sub-subcategory 2.2.1.2","depth":3},"includes":[[]],"links":{"self":"http:\/\/localhost\/api\/v1\/categories\/27"}}]],"links":{"self":"http:\/\/localhost\/api\/v1\/categories\/25"}},{"type":"category","id":28,"attributes":{"name":"Sub-subcategory 2.2.2","depth":2},"includes":[[{"type":"category","id":29,"attributes":{"name":"Sub-sub-subcategory 2.2.2.1","depth":3},"includes":[[]],"links":{"self":"http:\/\/localhost\/api\/v1\/categories\/29"}},{"type":"category","id":32,"attributes":{"name":"nova1","depth":3},"includes":[[]],"links":{"self":"http:\/\/localhost\/api\/v1\/categories\/32"}}]],"links":{"self":"http:\/\/localhost\/api\/v1\/categories\/28"}}]],"links":{"self":"http:\/\/localhost\/api\/v1\/categories\/24"}},{"type":"category","id":30,"attributes":{"name":"Sub-sub-subcategory 2.2.2.2","depth":3},"includes":[[]],"links":{"self":"http:\/\/localhost\/api\/v1\/categories\/30"}}]],"links":{"self":"http:\/\/localhost\/api\/v1\/categories\/16"}},{"type":"category","id":31,"attributes":{"name":"nova","depth":0},"includes":[[]],"links":{"self":"http:\/\/localhost\/api\/v1\/categories\/31"}}]}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/v1/categories/{id}'
+    metadata:
+      groupName: Category
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'View category'
+      description: 'Fetch specific category.'
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the category.'
+        required: true
+        example: 16
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        custom: []
+    cleanUrlParameters:
+      id: 16
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"data":{"type":"category","id":16,"attributes":{"name":"Main Category 2","depth":0},"includes":[[{"type":"category","id":17,"attributes":{"name":"Subcategory 2.1","depth":1},"includes":[[{"type":"category","id":18,"attributes":{"name":"Sub-subcategory 2.1.1","depth":2},"includes":[[{"type":"category","id":19,"attributes":{"name":"Sub-sub-subcategory 2.1.1.1","depth":3},"includes":[[]],"links":{"self":"http:\/\/localhost\/api\/v1\/categories\/19"}},{"type":"category","id":20,"attributes":{"name":"Sub-sub-subcategory 2.1.1.2","depth":3},"includes":[[]],"links":{"self":"http:\/\/localhost\/api\/v1\/categories\/20"}}]],"links":{"self":"http:\/\/localhost\/api\/v1\/categories\/18"}},{"type":"category","id":21,"attributes":{"name":"Sub-subcategory 2.1.2","depth":2},"includes":[[{"type":"category","id":22,"attributes":{"name":"Sub-sub-subcategory 2.1.2.1","depth":3},"includes":[[]],"links":{"self":"http:\/\/localhost\/api\/v1\/categories\/22"}},{"type":"category","id":23,"attributes":{"name":"Sub-sub-subcategory 2.1.2.2","depth":3},"includes":[[]],"links":{"self":"http:\/\/localhost\/api\/v1\/categories\/23"}}]],"links":{"self":"http:\/\/localhost\/api\/v1\/categories\/21"}}]],"links":{"self":"http:\/\/localhost\/api\/v1\/categories\/17"}},{"type":"category","id":24,"attributes":{"name":"Subcategory 2.2","depth":1},"includes":[[{"type":"category","id":25,"attributes":{"name":"Sub-subcategory 2.2.1","depth":2},"includes":[[{"type":"category","id":26,"attributes":{"name":"Sub-sub-subcategory 2.2.1.1","depth":3},"includes":[[]],"links":{"self":"http:\/\/localhost\/api\/v1\/categories\/26"}},{"type":"category","id":27,"attributes":{"name":"Sub-sub-subcategory 2.2.1.2","depth":3},"includes":[[]],"links":{"self":"http:\/\/localhost\/api\/v1\/categories\/27"}}]],"links":{"self":"http:\/\/localhost\/api\/v1\/categories\/25"}},{"type":"category","id":28,"attributes":{"name":"Sub-subcategory 2.2.2","depth":2},"includes":[[{"type":"category","id":29,"attributes":{"name":"Sub-sub-subcategory 2.2.2.1","depth":3},"includes":[[]],"links":{"self":"http:\/\/localhost\/api\/v1\/categories\/29"}},{"type":"category","id":32,"attributes":{"name":"nova1","depth":3},"includes":[[]],"links":{"self":"http:\/\/localhost\/api\/v1\/categories\/32"}}]],"links":{"self":"http:\/\/localhost\/api\/v1\/categories\/28"}}]],"links":{"self":"http:\/\/localhost\/api\/v1\/categories\/24"}},{"type":"category","id":30,"attributes":{"name":"Sub-sub-subcategory 2.2.2.2","depth":3},"includes":[[]],"links":{"self":"http:\/\/localhost\/api\/v1\/categories\/30"}}]],"links":{"self":"http:\/\/localhost\/api\/v1\/categories\/16"}}}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
