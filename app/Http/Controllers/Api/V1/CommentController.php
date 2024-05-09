@@ -2,27 +2,21 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Http\Controllers\Controller;
+use App\Http\Filters\Api\V1\CommentFilter;
 use App\Http\Requests\Api\V1\StoreCommentRequest;
 use App\Http\Requests\Api\V1\UpdateCommentRequest;
+use App\Http\Resources\Api\V1\CommentResource;
 use App\Models\Comment;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
-class CommentController extends Controller
+class CommentController extends ApiController
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(CommentFilter $filters)
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        return CommentResource::collection(Comment::filter($filters)->paginate());
     }
 
     /**
@@ -30,7 +24,9 @@ class CommentController extends Controller
      */
     public function store(StoreCommentRequest $request)
     {
-        //
+        $comment = Comment::create($request->mappedAttributes());
+
+        return new CommentResource($comment);
     }
 
     /**
@@ -38,30 +34,41 @@ class CommentController extends Controller
      */
     public function show(Comment $comment)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Comment $comment)
-    {
-        //
+        if ($this->include('user')) {
+            return new CommentResource($comment->load('user'));
+        }
+        return new CommentResource($comment);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCommentRequest $request, Comment $comment)
+    public function update(UpdateCommentRequest $request, $comment_id)
     {
-        //
+        try {
+            $comment = Comment::findOrFail($comment_id);
+            $this->authorize('update', $comment);
+
+            $comment->update($request->mappedAttributes());
+            return new CommentResource($comment);
+        } catch (ModelNotFoundException $exception) {
+            return $this->error('Comment not found', 404);
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Comment $comment)
+    public function destroy($comment_id)
     {
-        //
+        try {
+            $comment = Comment::findOrFail($comment_id);
+            $this->authorize('delete', $comment);
+
+            $comment->delete();
+            return $this->success('Comment deleted!', null);
+        } catch (ModelNotFoundException $exception) {
+            return $this->error('Comment not found', 404);
+        }
     }
 }
