@@ -4,7 +4,6 @@
 - Install Docker (depending on your system, install WSP for Windows and update to WSP2).
 - Copy and rename .env.example to .env.
 - Generate keys: `php artisan key:generate`
-- Composer update: `composer update`
 - Add Sail to the root: `alias sail='bash vendor/bin/sail`
 - Install volumes: `sail install`
 - Start containers: `sail up`
@@ -19,3 +18,6 @@
 
 ## Api documentation
 - Documentation on: `http://localhost/docs`
+
+## ER diagram
+- Located at root folder: ERdiagram.png
